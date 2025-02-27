@@ -16,7 +16,7 @@ import java.util.Date;
 public class Datos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    Long id;
     String nombre;
     String apellido1;
     String apellido2;
