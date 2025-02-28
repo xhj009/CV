@@ -1,13 +1,17 @@
 package CVGenerador.com.service.impl;
 
+
+
 import CVGenerador.com.entity.Datos;
 import CVGenerador.com.repository.DatosRepository;
 import CVGenerador.com.service.DatosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+ @Service
 public class DatosServiceImpl implements DatosService {
     @Autowired
     DatosRepository datosRepository;
@@ -39,7 +43,7 @@ public class DatosServiceImpl implements DatosService {
 
     @Override
     public ResponseEntity<Datos> update(Long id, Datos datos) {
-        Datos datos1 = datosRepository.getById(id);
+        Datos datos1 = datosRepository.findById(id).get();
         datos1.setNombre(datos.getNombre());
         datos1.setApellido1(datos.getApellido1());
         datos1.setApellido2(datos.getApellido2());
@@ -47,19 +51,19 @@ public class DatosServiceImpl implements DatosService {
         datos1.setEmail(datos.getEmail());
         datos1.setPerfil(datos.getPerfil());
         datos1.setFormacion(datos.getFormacion());
-        datos.setFechaEmpresaInicio(datos.getFechaInicio());
+        datos1.setFechaInicio(datos.getFechaInicio());
         datos1.setFechaFin(datos.getFechaFin());
         datos1.setEmpresa(datos.getEmpresa());
         datos1.setFechaEmpresaInicio(datos.getFechaEmpresaInicio());
         datos1.setFechaEmpresaFin(datos.getFechaEmpresaFin());
         datosRepository.save(datos1);
 
-        return (ResponseEntity<Datos>) ResponseEntity.ok();
+        return ResponseEntity.ok(datos1);
     }
 
     @Override
     public ResponseEntity<Datos> delete(Long id) {
         datosRepository.deleteById(id);
-        return (ResponseEntity<Datos>) ResponseEntity.ok();
+        return ResponseEntity.noContent().build();
     }
 }
