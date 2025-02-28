@@ -38,7 +38,7 @@ public class DatosServiceImpl implements DatosService {
         dato.setFechaEmpresaFin(datos.getFechaEmpresaFin());
         datosRepository.save(dato);
 
-        return (ResponseEntity<Datos>) ResponseEntity.ok();
+        return ResponseEntity.ok(dato);
     }
 
     @Override
